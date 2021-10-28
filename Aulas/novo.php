@@ -1,3 +1,17 @@
+<?php
+require 'funcao.php'; // o require para o processamento se houver algum erro, diferente do include 
+
+// verifica se houve alguma ação de submit do tipo POST
+if (!empty($_POST)) {
+    $descricao = $_POST['cpDescricao'];
+    $data = $_POST['cpData'];
+    $status = 'Pendente';
+
+    inserir($descricao, $data, $status);
+    header("location: exemplo03.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -27,7 +41,8 @@
 
             <label>
                 Data:
-                <input type="datetime-local" name="cpData"> <!--input do tipo data e hora-->
+                <input type="datetime-local" name="cpData">
+                <!--input do tipo data e hora-->
             </label><br>
 
             <input type="submit" value="Cadastrar">

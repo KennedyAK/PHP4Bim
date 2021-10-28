@@ -47,6 +47,7 @@ function buscaTarefa($descricao){
     // NO MOMENTO de explicar os valores, basta CONCATENAR com '%'.. linha 49
 
     $query->bindValue(":d", $descricao.'%'); // basicamente é uma explicacao dos valores quando o parametro for acionado
+    $query->execute();
     $conexao = null;
     return $query;
 }

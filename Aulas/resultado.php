@@ -45,12 +45,20 @@
                     <th>Status</th>
                 </tr>
 
-                <tr>
-                    <td>1</td>
-                    <td>Antonio</td>
-                    <td>2021-10-27 20:09</td>
-                    <td>Pendente</td>
-                </tr>
+                <?php
+                include 'funcao.php'; // o include realiza a mesma tarefa do require, porem, continua rodando o sistema se houver agum erro
+                $resultado = visualizarTarefa();
+                $dados = $resultado->fetchAll(PDO::FETCH_ASSOC); // separa em um vetor php mostrando o conteudo de cada coluna
+                foreach ($dados as $conteudo) {
+                    echo '<tr>';
+                    echo '<td>' . $conteudo['idtarefa'] . '</td>';
+                    echo '<td>' . $conteudo['descricao'] . '</td>';
+                    echo '<td>' . $conteudo['data'] . '</td>';
+                    echo '<td>' . $conteudo['status'] . '</td>';
+                    echo '</tr>';
+                }
+
+                ?>
 
             </table><br>
             <a href="exemplo03.php">Voltar</a>

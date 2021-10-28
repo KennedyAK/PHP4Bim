@@ -16,11 +16,11 @@
                 margin: 0 auto;
                 width: 600px;
             }
-            
+
             h3 {
                 text-align: center;
             }
-            
+
             table,
             th,
             td {
@@ -28,7 +28,7 @@
                 border-bottom: 1px solid black;
                 text-align: center;
             }
-            
+
             table {
                 border-bottom: 0px solid black;
             }
@@ -50,12 +50,30 @@
                     <th>Data</th>
                     <th>Status</th>
                 </tr>
-                <tr>
-                    <td>01</td>
-                    <td>Antonio</td>
-                    <td>2021-10-28 23:01</td>
-                    <td>Pendente</td>
-                </tr>
+
+                <?php
+
+                if (!empty($_POST['cpDesc'])) {
+                    include 'funcao.php';
+
+                    $resultado = buscaTarefa($_POST['cpDesc']);
+                    $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+                    foreach ($dados as $conteudo) {
+                        echo '<tr>';
+                        echo '<td>' . $conteudo['idtarefa'] . '</td>';
+                        echo '<td>' . $conteudo['descricao'] . '</td>';
+                        echo '<td>' . $conteudo['data'] . '</td>';
+                        echo '<td>' . $conteudo['status'] . '</td>';
+                        echo '</tr>';
+                    } //foreach
+                } else {
+                    echo '<tr>';
+                    echo '<td colspan="4">Nenhum registro encontrado</td>';
+                    echo '</tr>';
+                } //if post
+                ?>
+                
             </table><br>
             <a href="exemplo03.php">Voltar</a>
         </fieldset>
