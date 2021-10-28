@@ -44,13 +44,35 @@
                     <th>Data</th>
                     <th>Status</th>
                 </tr>
+                <?php
+                $conexao = new mysqli("localhost", "root", "", "bdphp");
+                if ($conexao->connect_error)
+                    echo 'erro ao conectar: ' . $conexao->connect_error;
+                
+                $resultado = $conexao->query("SELECT * FROM tarefa ORDER BY descricao");
 
-                <tr>
-                    <th>1</th>
-                    <th>Antonio</th>
-                    <th>2021-10-27 20:09</th>
-                    <th>Pendente</th>
-                </tr>
+                $tupla = array();
+                while ($linha = $resultado->fetch_assoc()) {
+                    array_push($tupla, $linha);
+                }
+
+                foreach ($tupla as $conteudo) :
+                ?>
+                    <tr>
+                        <td>
+                            <?php echo ($conteudo['idtarefa']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($conteudo['descricao']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($conteudo['data']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($conteudo['status']); ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
 
             </table><br>
             <a href="exemplo03.php">Voltar</a>
