@@ -37,7 +37,6 @@
         <fieldset>
             <h3>Tarefas Cadastradas</h3>
             <table>
-                <!--border-collapse: collapse;...   retira a borda dupla do html-->
                 <tr>
                     <th>ID</th>
                     <th>Descrição</th>

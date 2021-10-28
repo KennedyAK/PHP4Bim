@@ -46,10 +46,10 @@
                 </tr>
 
                 <tr>
-                    <th>1</th>
-                    <th>Antonio</th>
-                    <th>2021-10-27 20:09</th>
-                    <th>Pendente</th>
+                    <td>1</td>
+                    <td>Antonio</td>
+                    <td>2021-10-27 20:09</td>
+                    <td>Pendente</td>
                 </tr>
 
             </table><br>
