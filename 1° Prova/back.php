@@ -14,7 +14,6 @@ function cadastrar($veiculo, $placa)
 
     // O SENHOR explicou uma coisa no video, mas no pdf pede para salvar tbm o tipo do veiculo (:/)
 
-
     $query->bindValue(":veiculo", $veiculo);
     $query->bindValue(":placa", $placa);
 
