@@ -14,37 +14,37 @@
         * {
             font-size: 18px;
         }
-        
+
         fieldset {
             width: 600px;
             margin: auto;
             text-align: center;
         }
-        
+
         .spaceM {
             margin-bottom: 12px;
         }
-        
+
         .efec {
             cursor: pointer;
             color: black;
             font-size: 20px;
             text-decoration: none;
         }
-        
+
         .efec:hover {
             color: rgb(10, 68, 19);
             font-weight: bolder;
             text-decoration: overline;
         }
-        
+
         input[type=submit]:hover {
             cursor: pointer;
             background-color: black;
             color: white;
             font-size: 19px;
         }
-        
+
         hr {
             margin: 20px;
         }
@@ -78,7 +78,7 @@
                 border-bottom: 1px solid black;
                 text-align: center;
             }
-            
+
             table {
                 border-bottom: 0px solid black;
             }
@@ -93,24 +93,29 @@
             </tr>
 
             <?php
+
+
+            $err404 = '<tr><td colspan="5"> Nenhum registro encontrado </td></tr>';
             if (!empty($_POST['cpbus']) && ($_POST['cpNumberBuscar'])) {
                 include 'back.php';
 
                 $resultado = consulta($_POST['cpbus'], $_POST['cpNumberBuscar']);
                 $dados = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach ($dados as $conteudo) {
-                    echo '<tr>';
-                    echo '<td>' . $conteudo['idvaga'] . '</td>';
-                    echo '<td>' . $conteudo['placa'] . '</td>';
-                    echo '<td>' . $conteudo['ticket'] . '</td>';
-                    echo '<td>' . $conteudo['entrada'] . '</td>';
-                    echo '</tr>';
+                if ($dados == null) {
+                    echo $err404;
+                } else {
+                    foreach ($dados as $conteudo) {
+                        echo '<tr>';
+                        echo '<td>' . $conteudo['idvaga'] . '</td>';
+                        echo '<td>' . $conteudo['placa'] . '</td>';
+                        echo '<td>' . $conteudo['ticket'] . '</td>';
+                        echo '<td>' . $conteudo['entrada'] . '</td>';
+                        echo '</tr>';
+                    }
                 }
             } else {
-                echo '<tr>';
-                echo '<td colspan="5">Nenhum registro encontrado</td>';
-                echo '</tr>';
+                echo $err404;
             }
             ?>
 

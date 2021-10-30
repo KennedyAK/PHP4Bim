@@ -18,7 +18,7 @@ function cadastrar($veiculo, $placa)
     $query->bindValue(":placa", $placa);
 
     date_default_timezone_set("America/Cuiaba");
-    $query->bindValue(":entrada", $data = date("d/m/y H:i", time()));
+    $query->bindValue(":entrada", $data = date("y/m/d H:i", time()));
 
     $partTicket = str_replace("/", "", $data);
     $partTicket = str_replace(":", "", $partTicket);
@@ -29,29 +29,23 @@ function cadastrar($veiculo, $placa)
     $conexao = null;
 }
 
-function consulta($tipo, $number)
+function consulta($tipo, $codigo)
 {
     $conexao = conectar();
 
     switch ($tipo) {
         case $tipo == 'p':
             $query = $conexao->prepare("SELECT * FROM vaga WHERE placa = :placa;");
-            $query->bindValue(":placa", $number);
-            $query->execute();
-            $conexao = null;
-            return $query;
+            $query->bindValue(":placa", $codigo);
             break;
 
         case $tipo == 't':
             $query = $conexao->prepare("SELECT * FROM vaga WHERE ticket LIKE :ticket;");
-            $query->bindValue(":ticket", $number . '%');
-            $conexao = null;
-            return $query;
-            break;
-
-        default:
-            return '<td colspan="5">Nenhum registro encontrado</td>';
+            $query->bindValue(":ticket", $codigo . '%');
             break;
     }
+
+    $query->execute();
+    return $query;
     $conexao = null;
 }
